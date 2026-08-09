@@ -1082,7 +1082,9 @@ body::before {
 </div>
 
 <script>
-const API_BASE = window.location.origin;
+const API_BASE = (window.location.protocol && window.location.protocol.startsWith('http')) 
+  ? window.location.origin 
+  : 'http://127.0.0.1:5050';
 let currentSessionId = null;
 let currentQuestionNum = 1;
 let voiceEnabled = false;
@@ -1133,8 +1135,11 @@ function showWelcome() {
 
 // ── START INTERVIEW ─────────────────────────────────────────────────────────
 async function startInterviewSession() {
-  const name = document.getElementById('cand-name-input').value.trim();
-  if (!name) { showToast('Please enter candidate name.'); return; }
+  let name = document.getElementById('cand-name-input').value.trim();
+  if (!name) { 
+    name = "Candidate A"; 
+    document.getElementById('cand-name-input').value = name;
+  }
 
   let courseContext = '';
   if (selectedCourseType === 'cohort') {
