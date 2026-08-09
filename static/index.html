@@ -62,7 +62,23 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* 2026 Ambient atmosphere */
+/* 2026 Extreme Right Ultra-Thin Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 70, 229, 0.7);
+}
+
+/* Background ambient light */
 body::before {
   content: '';
   position: absolute;
@@ -352,11 +368,16 @@ body::before {
 }
 
 .hero-logo-img {
-  width: 90px;
-  height: 90px;
+  width: 96px;
+  height: 96px;
   object-fit: contain;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 10px 25px rgba(79, 70, 229, 0.25));
+  margin-bottom: 22px;
+  border-radius: var(--radius-xl);
+  padding: 12px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  filter: drop-shadow(0 6px 16px rgba(79, 70, 229, 0.15));
   animation: floatLogo 4s ease-in-out infinite;
 }
 @keyframes floatLogo {
@@ -1383,12 +1404,39 @@ async function openSessionDetails(sid) {
   try {
     const res = await fetch(`${API_BASE}/api/sessions/${sid}`);
     const data = await res.json();
-    if (data.evaluation) {
-      renderScorecardModal({ ...data.evaluation, candidate_name: data.candidate_name, total_questions: data.question_count });
+    
+    currentSessionId = sid;
+    currentQuestionNum = data.question_count || 1;
+    
+    // Switch to chat screen
+    document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('chat-screen').style.display = 'flex';
+    document.getElementById('header-end-btn').style.display = 'flex';
+    
+    const container = document.getElementById('chat-messages');
+    container.innerHTML = '';
+    
+    if (data.history && data.history.length > 0) {
+      data.history.forEach((m, idx) => {
+        const role = (m.role === 'assistant' || m.role === 'ai') ? 'ai' : 'user';
+        const tag = (role === 'ai' && idx === 0) ? 'Interview Session' : (role === 'ai' ? 'Follow-up' : '');
+        appendChatMessage(role, m.content, tag);
+      });
     } else {
-      showToast(`Session: ${data.candidate_name} · ${data.question_count} Qs (${data.status})`);
+      appendChatMessage('ai', `Welcome back! Continuing interview session for ${data.candidate_name}.`, 'Session Resumed');
     }
-  } catch(e) { showToast('Could not fetch session details.'); }
+    
+    updateProgressText();
+    loadSessionHistory();
+    
+    if (data.status === 'completed' && data.evaluation) {
+      showToast(`Resumed session for ${data.candidate_name} (Completed). Click 'End & Evaluate' to view report.`);
+    } else {
+      showToast(`Resumed interview session for ${data.candidate_name}.`);
+    }
+  } catch(e) {
+    showToast('Could not load session history.');
+  }
 }
 
 // ── SETTINGS & VOICE ─────────────────────────────────────────────────────────
