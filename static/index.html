@@ -4,21 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>HireGenie Pro — AI Interview Platform</title>
-<meta name="description" content="HireGenie Pro: AI-powered technical interview platform that conducts adaptive, curriculum-aware interviews and generates detailed scorecards." />
+<meta name="description" content="HireGenie Pro: Next-generation technical interview platform conducting adaptive, curriculum-aware assessments." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root {
-  --bg-app: #fcfcfd;
-  --bg-sidebar: #f8fafc;
+  --bg-app: #f8fafc;
+  --bg-sidebar: #ffffff;
   --bg-surface: #ffffff;
   --bg-surface-hover: #f1f5f9;
   --bg-surface-active: #e2e8f0;
   --border-light: #e2e8f0;
   --border-medium: #cbd5e1;
-  --border-focus: #818cf8;
+  --border-focus: #6366f1;
   --text-main: #0f172a;
   --text-sub: #475569;
   --text-muted: #94a3b8;
@@ -33,11 +33,19 @@
   --orange-soft: #fffbeb;
   --red: #ef4444;
   --red-soft: #fef2f2;
-  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
-  --shadow-float: 0 12px 36px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
-  --shadow-modal: 0 24px 60px rgba(15, 23, 42, 0.18);
-  --sidebar-w: 270px;
+  --shadow-subtle: 0 2px 4px rgba(0, 0, 0, 0.03);
+  --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+  --shadow-float: 0 16px 40px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.03);
+  --shadow-modal: 0 28px 70px rgba(15, 23, 42, 0.22);
+  --sidebar-w: 275px;
+
+  /* Modern 2026 organic corner design system */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-xxl: 32px;
+  --radius-pill: 9999px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,20 +62,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Background ambient light */
+/* 2026 Ambient atmosphere */
 body::before {
   content: '';
   position: absolute;
-  top: -150px;
-  left: 30%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+  top: -120px;
+  left: 25%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.07) 0%, rgba(255, 255, 255, 0) 70%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* ── SIDEBAR (Claude / ChatGPT Style) ── */
+/* ── SIDEBAR (Ultra-Modern 2026 Navigation) ── */
 #sidebar {
   width: var(--sidebar-w);
   min-width: var(--sidebar-w);
@@ -86,7 +94,7 @@ body::before {
 }
 
 .sidebar-top {
-  padding: 16px 16px 12px;
+  padding: 18px 18px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -95,88 +103,90 @@ body::before {
 .brand-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: none;
   border: none;
   cursor: pointer;
   text-decoration: none;
   color: var(--text-main);
 }
-.brand-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: var(--accent-gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: 800;
-  font-size: 16px;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+
+.brand-logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  filter: drop-shadow(0 4px 8px rgba(79, 70, 229, 0.2));
+  transition: transform 0.2s ease;
 }
+.brand-btn:hover .brand-logo-img {
+  transform: scale(1.05);
+}
+
 .brand-title {
   font-weight: 800;
-  font-size: 16px;
+  font-size: 17px;
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #0f172a 0%, #475569 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .new-chat-btn {
-  margin: 4px 14px 14px;
-  padding: 11px 16px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: 12px;
+  margin: 6px 16px 16px;
+  padding: 12px 18px;
+  background: var(--accent-soft);
+  border: 1.5px solid rgba(79, 70, 229, 0.15);
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   box-shadow: var(--shadow-subtle);
 }
 .new-chat-btn:hover {
-  background: var(--bg-surface-hover);
-  border-color: var(--border-medium);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-card);
+  background: var(--accent);
+  color: #ffffff;
+  border-color: transparent;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.25);
 }
-.new-chat-btn svg { width: 18px; height: 18px; color: var(--accent); }
+.new-chat-btn svg { width: 18px; height: 18px; }
+.new-chat-btn:hover svg { color: #ffffff; }
 
 .sidebar-scroll {
   flex: 1;
   overflow-y: auto;
-  padding: 0 10px 14px;
+  padding: 0 12px 16px;
 }
 .sidebar-scroll::-webkit-scrollbar { width: 4px; }
 .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 4px; }
 
 .sidebar-label {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 14px 8px 6px;
+  letter-spacing: 0.08em;
+  padding: 16px 10px 8px;
 }
 
 .session-link {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 10px;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: var(--radius-md);
   cursor: pointer;
   color: var(--text-sub);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 500;
   transition: all 0.15s ease;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
   text-decoration: none;
   border: 1px solid transparent;
 }
@@ -187,31 +197,31 @@ body::before {
 .session-link.active {
   background: var(--accent-soft);
   color: var(--accent);
-  border-color: rgba(79, 70, 229, 0.15);
+  border-color: rgba(79, 70, 229, 0.2);
   font-weight: 600;
 }
-.session-icon { font-size: 15px; color: var(--text-muted); flex-shrink: 0; }
+.session-icon { font-size: 16px; color: var(--text-muted); flex-shrink: 0; }
 .session-link.active .session-icon { color: var(--accent); }
 .session-info { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.session-name { font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+.session-name { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
 .session-sub { font-size: 11px; color: var(--text-muted); }
 
 .sidebar-footer {
-  padding: 14px;
+  padding: 16px;
   border-top: 1px solid var(--border-light);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  background: var(--bg-surface);
+  gap: 8px;
+  background: var(--bg-sidebar);
 }
 .sidebar-footer-btn {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 12px;
-  border-radius: 10px;
-  background: none;
-  border: 1px solid transparent;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: var(--bg-app);
+  border: 1px solid var(--border-light);
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
@@ -222,7 +232,7 @@ body::before {
 }
 .sidebar-footer-btn:hover {
   background: var(--bg-surface-hover);
-  border-color: var(--border-light);
+  border-color: var(--border-medium);
   color: var(--text-main);
 }
 
@@ -238,22 +248,22 @@ body::before {
 
 /* Header Topbar */
 #topbar {
-  height: 58px;
-  padding: 0 20px;
+  height: 60px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   border-bottom: 1px solid var(--border-light);
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
   z-index: 10;
   flex-shrink: 0;
 }
 
 .icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
   background: var(--bg-surface);
   display: flex;
@@ -268,16 +278,17 @@ body::before {
   background: var(--bg-surface-hover);
   color: var(--text-main);
   border-color: var(--border-medium);
+  transform: scale(1.02);
 }
 
 .model-pill {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 6px 14px;
+  gap: 10px;
+  padding: 7px 16px;
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
-  border-radius: 20px;
+  border-radius: var(--radius-pill);
   font-size: 13px;
   font-weight: 600;
   color: var(--text-main);
@@ -286,28 +297,28 @@ body::before {
   transition: all 0.15s ease;
 }
 .model-pill:hover { background: var(--bg-surface-hover); border-color: var(--border-medium); }
-.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px rgba(16, 185, 129, 0.4); }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
 
 .topbar-right {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .action-pill-btn {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 16px;
-  border-radius: 20px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--border-light);
   background: var(--bg-surface);
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-sub);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   box-shadow: var(--shadow-subtle);
 }
 .action-pill-btn:hover {
@@ -318,14 +329,15 @@ body::before {
   background: var(--accent-gradient);
   color: #ffffff;
   border-color: transparent;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
 }
 .action-pill-btn.primary:hover {
   background: var(--accent-gradient-hover);
-  transform: translateY(-1px);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
 }
 
-/* ── WELCOME SCREEN (ChatGPT / Claude style) ── */
+/* ── WELCOME SCREEN ── */
 #welcome-screen {
   flex: 1;
   display: flex;
@@ -334,28 +346,26 @@ body::before {
   justify-content: center;
   padding: 40px 20px;
   overflow-y: auto;
-  max-width: 860px;
+  max-width: 880px;
   margin: 0 auto;
   width: 100%;
 }
 
-.hero-logo {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  background: var(--accent-gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 32px;
-  font-weight: 800;
-  margin-bottom: 24px;
-  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+.hero-logo-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 10px 25px rgba(79, 70, 229, 0.25));
+  animation: floatLogo 4s ease-in-out infinite;
+}
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 .hero-heading {
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--text-main);
@@ -363,47 +373,47 @@ body::before {
   text-align: center;
 }
 .hero-subtext {
-  font-size: 15px;
+  font-size: 15.5px;
   color: var(--text-sub);
   text-align: center;
-  margin-bottom: 36px;
-  max-width: 540px;
-  line-height: 1.6;
+  margin-bottom: 38px;
+  max-width: 560px;
+  line-height: 1.65;
 }
 
-/* Setup Card Container */
+/* Setup Container with smooth corners */
 .setup-container {
   width: 100%;
-  max-width: 640px;
+  max-width: 660px;
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
-  border-radius: 24px;
-  padding: 32px 36px;
+  border-radius: var(--radius-xxl);
+  padding: 36px 40px;
   box-shadow: var(--shadow-float);
 }
 
 .form-label {
   display: block;
   font-size: 11.5px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-sub);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 8px;
+  letter-spacing: 0.07em;
+  margin-bottom: 10px;
 }
 
 .form-input {
   width: 100%;
-  padding: 13px 18px;
-  border: 1px solid var(--border-light);
-  border-radius: 14px;
-  font-size: 14.5px;
+  padding: 14px 20px;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: 15px;
   font-family: inherit;
   background: var(--bg-app);
   color: var(--text-main);
   outline: none;
-  transition: all 0.15s ease;
-  margin-bottom: 24px;
+  transition: all 0.2s ease;
+  margin-bottom: 26px;
 }
 .form-input:focus {
   border-color: var(--accent);
@@ -414,31 +424,32 @@ body::before {
 .course-cards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 24px;
+  gap: 16px;
+  margin-bottom: 26px;
 }
 .course-card-option {
-  padding: 16px;
+  padding: 18px;
   border: 1.5px solid var(--border-light);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   background: var(--bg-surface);
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
 }
 .course-card-option:hover {
   border-color: var(--border-medium);
   background: var(--bg-surface-hover);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
 }
 .course-card-option.selected {
   border-color: var(--accent);
   background: var(--accent-soft);
-  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.12);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.15);
 }
 .course-card-title {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 14.5px;
   color: var(--text-main);
   margin-bottom: 6px;
   display: flex;
@@ -446,9 +457,9 @@ body::before {
   gap: 8px;
 }
 .course-card-desc {
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--text-sub);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 /* Quick Fill Presets */
@@ -456,14 +467,14 @@ body::before {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   flex-wrap: wrap;
 }
 .preset-chip {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 14px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
   background: var(--bg-surface-hover);
   border: 1px solid var(--border-light);
   color: var(--text-sub);
@@ -473,21 +484,22 @@ body::before {
 .preset-chip:hover {
   background: var(--accent-soft);
   color: var(--accent);
-  border-color: rgba(79, 70, 229, 0.2);
+  border-color: rgba(79, 70, 229, 0.25);
+  transform: translateY(-1px);
 }
 
 #custom-json-wrapper {
   display: none;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 .json-textarea {
   width: 100%;
-  min-height: 130px;
-  padding: 14px;
-  border: 1px solid var(--border-light);
-  border-radius: 14px;
+  min-height: 140px;
+  padding: 16px;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
+  font-size: 12.5px;
   background: var(--bg-app);
   color: var(--text-main);
   outline: none;
@@ -500,12 +512,12 @@ body::before {
 
 .launch-btn {
   width: 100%;
-  padding: 15px;
+  padding: 16px;
   background: var(--accent-gradient);
   color: #fff;
   border: none;
-  border-radius: 14px;
-  font-size: 15.5px;
+  border-radius: var(--radius-md);
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
@@ -513,15 +525,15 @@ body::before {
   justify-content: center;
   gap: 10px;
   transition: all 0.2s ease;
-  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.35);
 }
 .launch-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.45);
+  box-shadow: 0 10px 28px rgba(79, 70, 229, 0.45);
 }
 .launch-btn:active { transform: translateY(0); }
 
-/* ── CHAT SCREEN (Claude / ChatGPT Canvas style) ── */
+/* ── CHAT SCREEN ── */
 #chat-screen {
   flex: 1;
   display: none;
@@ -536,8 +548,8 @@ body::before {
   padding: 36px 24px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  max-width: 820px;
+  gap: 30px;
+  max-width: 840px;
   width: 100%;
   margin: 0 auto;
 }
@@ -558,20 +570,26 @@ body::before {
 }
 
 .avatar-bubble {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
   font-size: 15px;
   flex-shrink: 0;
+  overflow: hidden;
 }
 .chat-row.ai .avatar-bubble {
-  background: var(--accent-gradient);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+.chat-row.ai .avatar-bubble img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 .chat-row.user .avatar-bubble {
   background: var(--bg-surface-active);
@@ -591,7 +609,7 @@ body::before {
   margin-bottom: 6px;
 }
 .sender-name {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-main);
 }
@@ -603,7 +621,7 @@ body::before {
   font-size: 10.5px;
   font-weight: 700;
   padding: 3px 10px;
-  border-radius: 14px;
+  border-radius: var(--radius-pill);
   background: var(--accent-soft);
   color: var(--accent);
 }
@@ -614,8 +632,8 @@ body::before {
   color: var(--text-main);
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
-  border-radius: 18px;
-  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
   box-shadow: var(--shadow-card);
   position: relative;
 }
@@ -624,14 +642,14 @@ body::before {
   color: #ffffff;
   border-color: transparent;
   border-top-right-radius: 4px;
-  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.25);
 }
 
 .chat-bubble p { margin-bottom: 12px; }
 .chat-bubble p:last-child { margin-bottom: 0; }
 .chat-bubble code {
   background: rgba(79, 70, 229, 0.08);
-  padding: 3px 7px;
+  padding: 3px 8px;
   border-radius: 6px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
@@ -641,7 +659,7 @@ body::before {
 }
 .chat-bubble pre {
   background: #1e1e2e;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 16px;
   margin: 14px 0;
   overflow-x: auto;
@@ -654,29 +672,12 @@ body::before {
   padding: 0;
 }
 
-/* Copy button inside code blocks */
-.code-copy-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  padding: 4px 8px;
-  font-size: 10px;
-  font-weight: 600;
-  color: #a6adc8;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-.code-copy-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
-
 /* Typing pulse indicator */
 .typing-box {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 14px 20px;
+  padding: 16px 22px;
 }
 .dot {
   width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
@@ -689,10 +690,10 @@ body::before {
   40% { transform: scale(1); opacity: 1; }
 }
 
-/* Floating Input Box (ChatGPT / Claude Style) */
+/* Floating Input Box */
 #input-container {
   padding: 16px 24px 28px;
-  max-width: 840px;
+  max-width: 860px;
   width: 100%;
   margin: 0 auto;
   flex-shrink: 0;
@@ -700,17 +701,17 @@ body::before {
 
 .floating-input-card {
   background: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: 22px;
-  padding: 14px 18px;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 16px 20px;
   box-shadow: var(--shadow-float);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
 }
 .floating-input-card:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 10px 35px rgba(79, 70, 229, 0.16);
+  box-shadow: 0 12px 40px rgba(79, 70, 229, 0.18);
 }
 
 #chat-input {
@@ -723,8 +724,8 @@ body::before {
   line-height: 1.55;
   background: transparent;
   color: var(--text-main);
-  max-height: 190px;
-  min-height: 26px;
+  max-height: 200px;
+  min-height: 28px;
 }
 #chat-input::placeholder { color: var(--text-muted); }
 
@@ -733,7 +734,7 @@ body::before {
   align-items: center;
   justify-content: space-between;
   margin-top: 12px;
-  padding-top: 8px;
+  padding-top: 10px;
   border-top: 1px solid var(--bg-surface-hover);
 }
 .toolbar-left {
@@ -745,11 +746,11 @@ body::before {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--text-sub);
-  padding: 6px 12px;
-  border-radius: 10px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -759,9 +760,9 @@ body::before {
 .tool-btn.active { color: var(--red); background: var(--red-soft); }
 
 .send-icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
   background: var(--accent);
   color: #fff;
   border: none;
@@ -769,10 +770,10 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s ease;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
 }
-.send-icon-btn:hover { background: var(--accent-light); transform: scale(1.04); }
+.send-icon-btn:hover { background: var(--accent-light); transform: scale(1.05); }
 .send-icon-btn:disabled { background: var(--border-medium); cursor: not-allowed; transform: none; box-shadow: none; }
 .send-icon-btn svg { width: 18px; height: 18px; }
 
@@ -781,7 +782,7 @@ body::before {
   position: fixed;
   inset: 0;
   background: rgba(15, 23, 42, 0.45);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   z-index: 100;
   display: none;
   align-items: center;
@@ -796,10 +797,10 @@ body::before {
 
 .modal-content {
   background: var(--bg-surface);
-  border-radius: 28px;
+  border-radius: var(--radius-xxl);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-modal);
-  max-width: 720px;
+  max-width: 740px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -811,7 +812,7 @@ body::before {
 }
 
 .modal-top {
-  padding: 26px 30px 18px;
+  padding: 28px 32px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -819,71 +820,71 @@ body::before {
 }
 .modal-heading { font-size: 20px; font-weight: 800; }
 .modal-close-btn {
-  background: none; border: none; cursor: pointer; font-size: 22px; color: var(--text-muted); padding: 4px 10px; border-radius: 10px;
+  background: none; border: none; cursor: pointer; font-size: 22px; color: var(--text-muted); padding: 4px 10px; border-radius: var(--radius-sm);
 }
 .modal-close-btn:hover { background: var(--bg-surface-hover); color: var(--text-main); }
-.modal-inner { padding: 26px 30px; }
+.modal-inner { padding: 28px 32px; }
 
 /* Scorecard Report styling */
 .report-hero-card {
-  padding: 28px;
-  border-radius: 20px;
+  padding: 30px;
+  border-radius: var(--radius-xl);
   color: #fff;
   text-align: center;
-  margin-bottom: 26px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  margin-bottom: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
 }
-.report-badge-signal { font-size: 34px; font-weight: 800; margin-bottom: 6px; }
+.report-badge-signal { font-size: 36px; font-weight: 800; margin-bottom: 6px; }
 .report-cand-title { font-size: 16px; opacity: 0.92; font-weight: 500; }
 
 .stats-4col {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 26px;
+  gap: 14px;
+  margin-bottom: 28px;
 }
 .stat-box {
   background: var(--bg-app);
   border: 1px solid var(--border-light);
-  border-radius: 14px;
-  padding: 16px 12px;
+  border-radius: var(--radius-lg);
+  padding: 18px 14px;
   text-align: center;
 }
-.stat-num { font-size: 26px; font-weight: 800; color: var(--accent); }
-.stat-text { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+.stat-num { font-size: 28px; font-weight: 800; color: var(--accent); }
+.stat-text { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
 
 .report-section-head {
   font-size: 12.5px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   color: var(--text-sub);
   margin-bottom: 12px;
 }
 
 .report-summary-box {
   background: var(--bg-app);
-  border-radius: 14px;
-  padding: 18px;
+  border-radius: var(--radius-lg);
+  padding: 20px;
   font-size: 14px;
   line-height: 1.75;
   color: var(--text-main);
-  margin-bottom: 26px;
+  margin-bottom: 28px;
   border: 1px solid var(--border-light);
 }
 
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
-.pill-tag { font-size: 12px; padding: 6px 14px; border-radius: 20px; font-weight: 600; }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.pill-tag { font-size: 12px; padding: 6px 16px; border-radius: var(--radius-pill); font-weight: 600; }
 .pill-strength { background: var(--green-soft); color: var(--green); }
 .pill-weakness { background: var(--red-soft); color: var(--red); }
 
 .report-table {
-  width: 100%; border-collapse: collapse; margin-bottom: 26px; font-size: 13.5px;
+  width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 13.5px;
 }
-.report-table th { text-align: left; padding: 12px; border-bottom: 2px solid var(--border-light); color: var(--text-sub); font-size: 11px; text-transform: uppercase; font-weight: 700; }
+.report-table th { text-align: left; padding: 12px; border-bottom: 2px solid var(--border-light); color: var(--text-sub); font-size: 11px; text-transform: uppercase; font-weight: 800; }
 .report-table td { padding: 12px; border-bottom: 1px solid var(--border-light); }
 
-.grade-badge { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 14px; }
+.grade-badge { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: var(--radius-pill); }
 .grade-strong { background: var(--green-soft); color: var(--green); }
 .grade-moderate { background: var(--orange-soft); color: var(--orange); }
 .grade-weak { background: var(--red-soft); color: var(--red); }
@@ -895,9 +896,9 @@ body::before {
   right: 24px;
   background: var(--text-main);
   color: #fff;
-  padding: 12px 22px;
-  border-radius: 14px;
-  font-size: 13.5px;
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
   font-weight: 600;
   z-index: 200;
   box-shadow: var(--shadow-modal);
@@ -913,7 +914,7 @@ body::before {
 <aside id="sidebar">
   <div class="sidebar-top">
     <a href="#" class="brand-btn" onclick="showWelcome()">
-      <div class="brand-icon">H</div>
+      <img src="/static/logo.png" class="brand-logo-img" alt="HireGenie" />
       <span class="brand-title">HireGenie Pro</span>
     </a>
   </div>
@@ -930,7 +931,7 @@ body::before {
 
   <div class="sidebar-footer">
     <button class="sidebar-footer-btn" onclick="openSettingsModal()">
-      <span>⚙️</span> API Engine Settings
+      <span>⚙️</span> Engine Settings
     </button>
   </div>
 </aside>
@@ -946,7 +947,7 @@ body::before {
 
     <div class="model-pill" onclick="openSettingsModal()">
       <span class="status-dot"></span>
-      <span id="header-model-name">HireGenie AI · Groq Llama-3.3-70B</span>
+      <span id="header-model-name">HireGenie Intelligence Engine • Active</span>
     </div>
 
     <div class="topbar-right">
@@ -958,13 +959,13 @@ body::before {
 
   <!-- WELCOME / START SCREEN -->
   <div id="welcome-screen">
-    <div class="hero-logo">H</div>
+    <img src="/static/logo.png" class="hero-logo-img" alt="HireGenie Logo" />
     <h1 class="hero-heading">What candidate are we evaluating?</h1>
     <p class="hero-subtext">HireGenie conducts realistic, multi-turn technical interviews and generates detailed competency scorecards.</p>
 
     <div class="setup-container">
       <label class="form-label">Candidate Full Name</label>
-      <input type="text" class="form-input" id="cand-name-input" placeholder="e.g. Devansh Sharma, Alex Rivera…" />
+      <input type="text" class="form-input" id="cand-name-input" placeholder="Candidate Name (e.g. Candidate A, Student X)..." />
 
       <label class="form-label">Select Evaluation Curriculum</label>
       <div class="course-cards-grid">
@@ -1031,7 +1032,10 @@ body::before {
 <div class="modal-backdrop" id="report-modal">
   <div class="modal-content">
     <div class="modal-top">
-      <div class="modal-heading">📊 Candidate Competency Report</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="/static/logo.png" style="width:32px;height:32px;object-fit:contain;" alt="Logo" />
+        <div class="modal-heading">Candidate Competency Report</div>
+      </div>
       <button class="modal-close-btn" onclick="closeModal('report-modal')">✕</button>
     </div>
     <div class="modal-inner" id="report-modal-body"></div>
@@ -1042,11 +1046,14 @@ body::before {
 <div class="modal-backdrop" id="settings-modal">
   <div class="modal-content" style="max-width: 540px;">
     <div class="modal-top">
-      <div class="modal-heading">⚙️ Multi-Provider LLM Pipeline</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="/static/logo.png" style="width:32px;height:32px;object-fit:contain;" alt="Logo" />
+        <div class="modal-heading">HireGenie Engine Configuration</div>
+      </div>
       <button class="modal-close-btn" onclick="closeModal('settings-modal')">✕</button>
     </div>
     <div class="modal-inner">
-      <p style="font-size:13px;color:var(--text-sub);margin-bottom:20px;">Automatic Failover Hierarchy: Groq (Primary Llama-3.3) → Google Gemini 2.0 → Cerebras → OpenRouter.</p>
+      <p style="font-size:13px;color:var(--text-sub);margin-bottom:20px;">Manage engine API parameters and fallback logic. Primary acceleration is online.</p>
       <div id="settings-keys-list"></div>
       <button class="launch-btn" style="margin-top:20px;" onclick="saveApiKeys()">💾 Save Key Settings</button>
     </div>
@@ -1075,11 +1082,11 @@ function fillPreset(key) {
 }
 
 const llmProviders = [
-  { key: 'groq', label: 'Groq (Llama-3.3-70B)', env: 'GROQ_API_KEY' },
-  { key: 'gemini', label: 'Google Gemini 2.0 Flash', env: 'GEMINI_API_KEY' },
-  { key: 'cerebras', label: 'Cerebras Ultra-Fast', env: 'CEREBRAS_API_KEY' },
-  { key: 'openrouter', label: 'OpenRouter Free', env: 'OPENROUTER_API_KEY' },
-  { key: 'sarvam', label: 'Sarvam AI', env: 'SARVAM_API_KEY' }
+  { key: 'groq', label: 'Primary Engine Tier 1', env: 'GROQ_API_KEY' },
+  { key: 'gemini', label: 'Primary Engine Tier 2', env: 'GEMINI_API_KEY' },
+  { key: 'cerebras', label: 'Secondary Fallback Tier 1', env: 'CEREBRAS_API_KEY' },
+  { key: 'openrouter', label: 'Secondary Fallback Tier 2', env: 'OPENROUTER_API_KEY' },
+  { key: 'sarvam', label: 'Regional Engine Tier', env: 'SARVAM_API_KEY' }
 ];
 
 // ── SIDEBAR TOGGLE ──────────────────────────────────────────────────────────
@@ -1124,7 +1131,7 @@ async function startInterviewSession() {
   }
 
   const btn = document.getElementById('start-interview-btn');
-  btn.disabled = true; btn.innerHTML = '<span>⚡ Initializing Interviewer AI...</span>';
+  btn.disabled = true; btn.innerHTML = '<span>⚡ Initializing Interview Engine...</span>';
 
   try {
     const res = await fetch(`${API_BASE}/api/session/start`, {
@@ -1155,7 +1162,7 @@ async function startInterviewSession() {
 // ── CHAT ENGINE ──────────────────────────────────────────────────────────────
 function autoGrowInput(el) {
   el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 190) + 'px';
+  el.style.height = Math.min(el.scrollHeight, 200) + 'px';
 }
 
 function handleChatKeyDown(e) {
@@ -1200,15 +1207,17 @@ function appendChatMessage(role, content, tag) {
   const row = document.createElement('div');
   row.className = `chat-row ${role}`;
 
-  const avatarText = role === 'ai' ? '✦' : '👤';
+  const avatarContent = role === 'ai' 
+    ? '<img src="/static/logo.png" style="width:26px;height:26px;object-fit:contain;" alt="Genie" />' 
+    : '👤';
   const tagHtml = (role === 'ai' && tag) ? `<span class="tag-badge">${tag}</span>` : '';
   const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   row.innerHTML = `
-    <div class="avatar-bubble">${avatarText}</div>
+    <div class="avatar-bubble">${avatarContent}</div>
     <div class="msg-wrapper">
       <div class="msg-header-line">
-        <span class="sender-name">${role === 'ai' ? 'HireGenie AI' : 'Candidate'}</span>
+        <span class="sender-name">${role === 'ai' ? 'HireGenie' : 'Candidate'}</span>
         <span class="msg-timestamp">${timeStr}</span>
         ${tagHtml}
       </div>
@@ -1226,7 +1235,7 @@ function showTypingPulse() {
   row.id = 'typing-row';
   row.className = 'chat-row ai';
   row.innerHTML = `
-    <div class="avatar-bubble">✦</div>
+    <div class="avatar-bubble"><img src="/static/logo.png" style="width:26px;height:26px;object-fit:contain;" alt="Genie" /></div>
     <div class="msg-wrapper">
       <div class="chat-bubble typing-box">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
@@ -1402,7 +1411,7 @@ function saveApiKeys() {
     const val = document.getElementById('key-' + p.key).value.trim();
     if (val) localStorage.setItem('hg_' + p.key, val);
   });
-  showToast('API key settings saved.');
+  showToast('Engine configuration saved.');
   closeModal('settings-modal');
 }
 
