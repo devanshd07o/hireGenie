@@ -1033,8 +1033,8 @@ body::before {
 
         <div class="input-toolbar">
           <div class="toolbar-left">
-            <button class="tool-btn" id="voice-toggle-btn" onclick="toggleVoiceMode()">
-              🔊 Voice Mode
+            <button class="tool-btn active" id="voice-toggle-btn" onclick="toggleVoiceMode()">
+              🔊 Voice ON (Male)
             </button>
             <span style="font-size:11.5px;color:var(--text-muted);margin-left:8px;font-weight:600" id="q-progress-text">Question 1 of ~8</span>
           </div>
@@ -1494,18 +1494,35 @@ function saveApiKeys() {
   closeModal('settings-modal');
 }
 
+let voiceEnabled = true;
+
+function getMaleVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  const male = voices.find(v => 
+    /male|david|mark|george|ryan|guy|natural|google us english/i.test(v.name)
+  );
+  return male || voices[0];
+}
+
 function toggleVoiceMode() {
   voiceEnabled = !voiceEnabled;
   const btn = document.getElementById('voice-toggle-btn');
   btn.classList.toggle('active', voiceEnabled);
-  btn.textContent = voiceEnabled ? '🔇 Voice Active' : '🔊 Voice Mode';
+  btn.textContent = voiceEnabled ? '🔊 Voice ON (Male)' : '🔇 Voice Muted';
 }
 
 function speakUtterance(text) {
-  const clean = text.replace(/[#*`_~>\[\]]/g, '');
-  const utt = new SpeechSynthesisUtterance(clean.slice(0, 400));
-  utt.rate = 0.95;
-  window.speechSynthesis.speak(utt);
+  if (!voiceEnabled) return;
+  try {
+    window.speechSynthesis.cancel();
+    const clean = text.replace(/[#*`_~>\[\]]/g, '');
+    const utt = new SpeechSynthesisUtterance(clean.slice(0, 450));
+    const male = getMaleVoice();
+    if (male) utt.voice = male;
+    utt.rate = 0.98;
+    utt.pitch = 0.95;
+    window.speechSynthesis.speak(utt);
+  } catch(e) {}
 }
 
 function showToast(msg) {
