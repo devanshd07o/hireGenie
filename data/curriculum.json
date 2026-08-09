@@ -1,0 +1,250 @@
+[
+  {
+    "day": 1,
+    "module": "Foundations of AI & LLMs",
+    "topic": "Introduction to Modern LLMs and Transformers Architecture",
+    "learning_objectives": ["Understand attention mechanisms", "Explore transformer decoder-only models"],
+    "tools_used": ["Hugging Face", "PyTorch"],
+    "difficulty": "beginner"
+  },
+  {
+    "day": 2,
+    "module": "Foundations of AI & LLMs",
+    "topic": "Tokenization, Embeddings, and Vector Spaces",
+    "learning_objectives": ["Understand BPE tokenizers", "Calculate cosine similarity across embedding vectors"],
+    "tools_used": ["tiktoken", "SentenceTransformers"],
+    "difficulty": "beginner"
+  },
+  {
+    "day": 3,
+    "module": "Prompt Engineering",
+    "topic": "System Prompting, Few-Shot Prompting, and Chain-of-Thought",
+    "learning_objectives": ["Master zero-shot and CoT prompt design", "Structure model outputs with system directives"],
+    "tools_used": ["OpenAI API", "Google AI Studio"],
+    "difficulty": "beginner"
+  },
+  {
+    "day": 4,
+    "module": "Prompt Engineering",
+    "topic": "Structured Output Generation and Schema Enforcement",
+    "learning_objectives": ["Enforce JSON outputs from LLMs", "Use Pydantic for response validation"],
+    "tools_used": ["Pydantic", "Instructor"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 5,
+    "module": "Retrieval-Augmented Generation",
+    "topic": "Building a RAG Pipeline with Vector Stores",
+    "learning_objectives": ["Chunking strategies for long documents", "Index documents into vector databases and perform similarity search"],
+    "tools_used": ["LangChain", "Pinecone", "ChromaDB"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 6,
+    "module": "Retrieval-Augmented Generation",
+    "topic": "Advanced RAG: Hybrid Search, Re-ranking, and Query Expansion",
+    "learning_objectives": ["Combine BM25 keyword search with dense embeddings", "Apply cross-encoder re-rankers"],
+    "tools_used": ["Cohere Rerank", "LlamaIndex"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 7,
+    "module": "Retrieval-Augmented Generation",
+    "topic": "Corrective RAG (CRAG) and Self-RAG",
+    "learning_objectives": ["Implement self-reflection loops for retrieval quality", "Fallback to web search on poor retrieval"],
+    "tools_used": ["Tavily Search API", "LangGraph"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 8,
+    "module": "Vector Databases",
+    "topic": "Vector Indexing Algorithms (HNSW, IVF, Flat)",
+    "learning_objectives": ["Compare distance metrics (L2, Inner Product, Cosine)", "Tune HNSW index parameters for speed vs recall"],
+    "tools_used": ["FAISS", "Qdrant"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 9,
+    "module": "Vector Databases",
+    "topic": "Filtering, Metadata Indexing, and Multi-Tenancy in Vector DBs",
+    "learning_objectives": ["Implement pre-filtering and post-filtering", "Isolate candidate data with multi-tenant namespaces"],
+    "tools_used": ["Pinecone", "Weaviate"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 10,
+    "module": "Agentic AI",
+    "topic": "Fundamentals of Autonomous AI Agents & ReAct Pattern",
+    "learning_objectives": ["Understand Reason + Act execution loop", "Implement tool selection and observation handling"],
+    "tools_used": ["LangChain Agents", "AutoGPT"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 11,
+    "module": "Agentic AI",
+    "topic": "Function Calling and Tool Integration",
+    "learning_objectives": ["Define OpenAPI tools for LLM consumption", "Execute python code safely in agent sandboxes"],
+    "tools_used": ["OpenAI Function Calling", "E2B Sandbox"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 12,
+    "module": "Agentic AI",
+    "topic": "Multi-Agent Orchestration and State Machines",
+    "learning_objectives": ["Build stateful agent graphs with branch routing", "Handle human-in-the-loop approvals"],
+    "tools_used": ["LangGraph", "CrewAI"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 13,
+    "module": "Agentic AI",
+    "topic": "Agent Memory: Short-term, Long-term, and Episodic Memory",
+    "learning_objectives": ["Manage context window overflow", "Persist agent memories across sessions using vector databases"],
+    "tools_used": ["Mem0", "Zep"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 14,
+    "module": "Model Context Protocol",
+    "topic": "Model Context Protocol (MCP) Core Concepts & Architecture",
+    "learning_objectives": ["Understand MCP client, server, and host architecture", "Standardize context injection across tools"],
+    "tools_used": ["MCP SDK", "Anthropic Claude Desktop"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 15,
+    "module": "Model Context Protocol",
+    "topic": "Building Custom MCP Servers for Database & API Integrations",
+    "learning_objectives": ["Implement MCP resources, prompts, and tools", "Connect internal REST APIs to standard MCP interfaces"],
+    "tools_used": ["FastMCP (Python)", "TypeScript MCP SDK"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 16,
+    "module": "Fine-Tuning & Open Models",
+    "topic": "Supervised Fine-Tuning (SFT) & LoRA / QLoRA",
+    "learning_objectives": ["Understand Parameter-Efficient Fine-Tuning (PEFT)", "Format dataset for Instruction Tuning"],
+    "tools_used": ["Unsloth", "Hugging Face PEFT", "TRL"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 17,
+    "module": "Fine-Tuning & Open Models",
+    "topic": "Quantization (GGUF, AWQ, GPTQ) & Local LLM Execution",
+    "learning_objectives": ["Convert 16-bit models to 4-bit quantized formats", "Run LLMs locally on consumer hardware"],
+    "tools_used": ["Ollama", "llama.cpp", "vLLM"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 18,
+    "module": "AI Engineering & Pipelines",
+    "topic": "Evaluations & Benchmarking (Evals)",
+    "learning_objectives": ["Design LLM-as-a-Judge test suites", "Measure grounding, answer relevance, and hallucination rates"],
+    "tools_used": ["Ragas", "DeepEval", "LangSmith"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 19,
+    "module": "AI Engineering & Pipelines",
+    "topic": "Observability, Tracing, and Telemetry",
+    "learning_objectives": ["Trace multi-step agent executions", "Monitor token latency, TTFT, and cost distribution"],
+    "tools_used": ["LangFuse", "Arize Phoenix", "OpenTelemetry"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 20,
+    "module": "AI Engineering & Pipelines",
+    "topic": "Guardrails & Safety Filters",
+    "learning_objectives": ["Prevent prompt injection and jailbreaking", "Sanitize sensitive PII in inputs/outputs"],
+    "tools_used": ["NeMo Guardrails", "Guardrails AI"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 21,
+    "module": "Production AI Systems",
+    "topic": "Caching Mechanisms for LLM Applications",
+    "learning_objectives": ["Implement exact match and semantic caching", "Reduce API costs and response latency"],
+    "tools_used": ["GPTCache", "Redis"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 22,
+    "module": "Production AI Systems",
+    "topic": "Asynchronous Processing & Streaming Responses",
+    "learning_objectives": ["Stream Server-Sent Events (SSE) from LLM backends", "Handle background queue tasks for heavy AI workloads"],
+    "tools_used": ["FastAPI SSE", "Celery", "Redis"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 23,
+    "module": "Production AI Systems",
+    "topic": "Rate Limiting, Load Balancing, and LLM Gateway Setup",
+    "learning_objectives": ["Route traffic across multiple LLM provider API keys", "Handle fallback on 429 rate limit errors"],
+    "tools_used": ["LiteLLM Gateway", "Kong Gateway"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 24,
+    "module": "AI Deployment",
+    "topic": "Containerizing AI Workloads with Docker",
+    "learning_objectives": ["Package FastAPI and vector DB services into multi-container builds", "Optimize Docker image size for Python AI apps"],
+    "tools_used": ["Docker", "Docker Compose"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 25,
+    "module": "AI Deployment",
+    "topic": "Serverless & Cloud Hosting for AI APIs",
+    "learning_objectives": ["Deploy FastAPI backends to Render/Railway/Fly.io", "Manage persistent SQLite and environment secrets"],
+    "tools_used": ["Render", "Railway", "Fly.io"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 26,
+    "module": "AI Security",
+    "topic": "OWASP Top 10 for LLM Applications",
+    "learning_objectives": ["Mitigate indirect prompt injection", "Secure API endpoints against unauthenticated access"],
+    "tools_used": ["OWASP Guidelines", "PyJWT"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 27,
+    "module": "Advanced Agentic AI",
+    "topic": "Planning & Self-Correction in Complex Reasoning Agents",
+    "learning_objectives": ["Implement Tree of Thoughts (ToT) prompting", "Build reflection cycles for self-correcting agent outputs"],
+    "tools_used": ["LangGraph", "DSPy"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 28,
+    "module": "Advanced RAG",
+    "topic": "Multimodal RAG with Vision-Language Models",
+    "learning_objectives": ["Extract and index charts/diagrams from PDFs", "Query multimodal vector indices"],
+    "tools_used": ["Unstructured.io", "CLIP", "GPT-4o Vision"],
+    "difficulty": "advanced"
+  },
+  {
+    "day": 29,
+    "module": "Enterprise Integration",
+    "topic": "Connecting AI Agents to SQL Relational Databases (Text-to-SQL)",
+    "learning_objectives": ["Build secure Text-to-SQL engines with schema pruning", "Validate SQL queries before execution"],
+    "tools_used": ["SQLAlchemy", "Vanna.ai"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 30,
+    "module": "AI System Cost & Scalability",
+    "topic": "Cost Optimization Strategy & Token Budgeting",
+    "learning_objectives": ["Calculate cost per query across model tiers", "Implement dynamic model selection"],
+    "tools_used": ["OpenRouter API", "Tiktoken"],
+    "difficulty": "intermediate"
+  },
+  {
+    "day": 31,
+    "module": "Capstone Project",
+    "topic": "End-to-End Autonomous AI SaaS Application Architecture",
+    "learning_objectives": ["Synthesize RAG, Multi-Agent Routing, MCP, and Production Deployment", "Prepare production-grade demo"],
+    "tools_used": ["FastAPI", "Flutter", "SQLite", "Docker"],
+    "difficulty": "advanced"
+  }
+]

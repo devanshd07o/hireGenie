@@ -1,0 +1,66 @@
+[
+  {
+    "candidate_id": "cand_001",
+    "name": "Aditi Sharma",
+    "completed_days": [1, 2, 3, 5, 6, 8, 9, 12, 14, 15, 18, 20, 22, 25],
+    "skipped_days": [4, 7, 10, 11, 13, 16, 17, 19, 21, 23, 24],
+    "attempts": {
+      "day_5": 2,
+      "day_12": 1,
+      "day_15": 1
+    },
+    "learning_signals": {
+      "day_5": "struggled with vector similarity concepts initially, retried and passed",
+      "day_12": "completed quickly, strong grasp of multi-agent graph orchestration",
+      "day_15": "successfully built custom MCP server for REST API integration"
+    }
+  },
+  {
+    "candidate_id": "cand_002",
+    "name": "Rohan Verma",
+    "completed_days": [1, 2, 3, 4, 5, 10, 11, 14, 18, 19, 21, 24, 25, 29, 31],
+    "skipped_days": [6, 7, 8, 9, 12, 13, 15, 16, 17, 20, 22, 23, 26, 27, 28, 30],
+    "attempts": {
+      "day_3": 1,
+      "day_5": 1,
+      "day_10": 3,
+      "day_11": 2
+    },
+    "learning_signals": {
+      "day_10": "retried agent ReAct loop concept 3 times before clearing test",
+      "day_18": "solid understanding of evals and LLM-as-a-judge frameworks",
+      "day_31": "completed capstone backend project"
+    }
+  },
+  {
+    "candidate_id": "cand_003",
+    "name": "Priya Patel",
+    "completed_days": [1, 2, 3, 5, 8, 14, 18, 21, 25],
+    "skipped_days": [4, 6, 7, 9, 10, 11, 12, 13, 15, 16, 17, 19, 20, 22, 23, 24, 26, 27, 28, 29, 30, 31],
+    "attempts": {
+      "day_1": 1,
+      "day_5": 1
+    },
+    "learning_signals": {
+      "day_5": "basic RAG understanding, skipped advanced re-ranking topics",
+      "day_14": "completed MCP core theory"
+    }
+  },
+  {
+    "candidate_id": "cand_004",
+    "name": "Karan Gupta",
+    "completed_days": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+    "skipped_days": [],
+    "attempts": {
+      "day_6": 1,
+      "day_12": 1,
+      "day_15": 1,
+      "day_27": 1
+    },
+    "learning_signals": {
+      "day_6": "perfect execution of hybrid RAG with BM25 + dense re-ranking",
+      "day_12": "advanced LangGraph orchestration expert",
+      "day_27": "implemented Tree of Thoughts self-correction agent framework"
+    }
+  }
+]
