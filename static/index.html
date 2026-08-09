@@ -1234,6 +1234,9 @@ function appendChatMessage(role, content, tag) {
   const tagHtml = (role === 'ai' && tag) ? `<span class="tag-badge">${tag}</span>` : '';
   const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
+  const msgId = 'msg-' + Math.random().toString(36).substr(2, 9);
+  const audioBtn = role === 'ai' ? `<button class="tool-btn" style="padding:2px 8px;font-size:11px" onclick="speakMessageText('${msgId}')">🔊 Listen</button>` : '';
+
   row.innerHTML = `
     <div class="avatar-bubble">${avatarContent}</div>
     <div class="msg-wrapper">
@@ -1241,13 +1244,41 @@ function appendChatMessage(role, content, tag) {
         <span class="sender-name">${role === 'ai' ? 'HireGenie' : 'Candidate'}</span>
         <span class="msg-timestamp">${timeStr}</span>
         ${tagHtml}
+        ${audioBtn}
       </div>
-      <div class="chat-bubble">${marked.parse(content)}</div>
+      <div class="chat-bubble" id="${msgId}">${marked.parse(content)}</div>
     </div>
   `;
 
   container.appendChild(row);
+
+  // Attach Copy Code buttons to any code blocks
+  const bubble = row.querySelector('.chat-bubble');
+  if (bubble) {
+    bubble.querySelectorAll('pre').forEach(pre => {
+      if (!pre.querySelector('.code-copy-btn')) {
+        const btn = document.createElement('button');
+        btn.className = 'code-copy-btn';
+        btn.textContent = 'Copy Code';
+        btn.onclick = () => {
+          const codeText = pre.querySelector('code')?.innerText || pre.innerText;
+          navigator.clipboard.writeText(codeText);
+          btn.textContent = 'Copied! ✓';
+          setTimeout(() => { btn.textContent = 'Copy Code'; }, 2000);
+        };
+        pre.appendChild(btn);
+      }
+    });
+  }
+
   container.scrollTop = container.scrollHeight;
+}
+
+function speakMessageText(msgId) {
+  const el = document.getElementById(msgId);
+  if (el) {
+    speakUtterance(el.innerText);
+  }
 }
 
 function showTypingPulse() {
